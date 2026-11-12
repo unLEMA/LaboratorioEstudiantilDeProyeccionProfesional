@@ -21,7 +21,15 @@
             font-family: 'Ancizar Sans';
             src: local('Ancizar Sans'), local('AncizarSans-Regular');
         }
-        body { font-family: 'Ancizar Sans', sans-serif; }
+        body { font-family: 'Ancizar Sans', sans-serif; overflow-x: hidden; }
+        html { -webkit-text-size-adjust: 100%; }
+        img { max-width: 100%; }
+        /* Foco visible para navegación con teclado */
+        button:focus-visible, a:focus-visible, select:focus-visible { outline: 3px solid #f3c1a8; outline-offset: 2px; }
+        @media (prefers-reduced-motion: reduce) {
+            .slideshow-track { animation: none; }
+            *, *::before, *::after { scroll-behavior: auto !important; }
+        }
         
         /* Colores unLEMA para las 6 Cajas */
         .color-box-1 { background-color: #b84b5c; } /* U - Rojo mate */
@@ -548,7 +556,7 @@
 </section>
     
 
-    <nav class="max-w-6xl mx-auto px-6 mb-12">
+    <nav id="indice-informes" aria-label="Índice de informes" class="max-w-6xl mx-auto px-6 mb-12 scroll-mt-4">
         <div class="text-center mb-8">
            <span class="inline-block bg-[#fae6df] text-[#c00022] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-2">Índice de Resultados</span>
             <h2 class="text-2xl md:text-3xl font-black text-gray-900">Selecciona un Informe</h2>
@@ -1413,7 +1421,7 @@
                 </div>
             </div>
 
-             <<!-- Descarga de Informe #03 (Fondo a ancho completo) -->
+             <!-- Descarga de Informe #03 (Fondo a ancho completo) -->
     <section class="relative left-1/2 -ml-[50vw] w-screen py-20 bg-gradient-to-b from-gray-50 to-[#fae6df]/40 border-t border-b border-gray-200 mt-16 mb-8">
         
         <!-- Contenedor interno centrado -->
@@ -1467,7 +1475,7 @@
                 </h4>
                 
                 <p class="text-sm text-gray-500 mb-8 leading-relaxed font-light">
-                    Análisis exhaustivo de las trayectorias estudiantiles próximos a egresar y la caracterización de los datos recopilados.
+                    Análisis exhaustivo de las trayectorias de los estudiantes próximos a egresar y la caracterización de los datos recopilados.
                 </p>
 
                 <!-- Botón de descarga interactivo -->
@@ -1478,7 +1486,6 @@
             </div>
         </div>
     </section>
-            </div>            
         </div>
 
 
@@ -1671,7 +1678,7 @@ los principales desafíos que identifican en relación con las habilidades trans
             <!-- ============================================================= -->
 <!-- 1 · GÉNERO (laboral destacada)                                -->
 <!-- ============================================================= -->
-<section id="seccion-genero" class="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 md:p-10 mb-10">
+<section id="seccion-genero" class="bg-white rounded-2xl shadow-xl border border-gray-100 p-4 sm:p-6 md:p-10 mb-10">
 
     <div class="text-center md:text-left mb-8 max-w-3xl">
         <span class="inline-block bg-[#fae6df] text-[#c00022] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-3">Lectura por género</span>
@@ -1682,7 +1689,7 @@ los principales desafíos que identifican en relación con las habilidades trans
     </div>
 
     <!-- TARJETA DESTACADA: LABORAL -->
-    <div class="relative rounded-3xl border-4 border-[#c00022] bg-gradient-to-br from-[#fae6df]/70 to-white p-6 md:p-8 mb-8">
+    <div class="relative rounded-3xl border-4 border-[#c00022] bg-gradient-to-br from-[#fae6df]/70 to-white p-4 sm:p-6 md:p-8 mb-8">
         <span class="absolute -top-4 left-6 bg-[#c00022] text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full flex items-center gap-2">
             <i data-lucide="briefcase" class="w-4 h-4"></i> Mercado laboral · Diferencia relevante
         </span>
@@ -1725,28 +1732,35 @@ los principales desafíos que identifican en relación con las habilidades trans
                 </div>
             </div>
 
-            <!-- Barras comparativas -->
-            <div>
-                <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Distribución de respuestas en la escala Likert</p>
+            <!-- Distribución Likert por género (con interruptor, como en el informe 3) -->
+            <div id="inf4-likert" class="rounded-2xl bg-white/80 border border-[#f3c1a8] p-3 sm:p-5 md:p-6 min-w-0 overflow-hidden">
+                <p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4 text-center sm:text-left">Distribución de respuestas en la escala Likert</p>
 
-                <div class="mb-5">
-                    <div class="flex justify-between text-sm font-semibold mb-1"><span>Hombres · niveles altos (4 y 5)</span><span class="text-[#c00022] font-bold">53,71 %</span></div>
-                    <div class="w-full bg-white rounded-full h-3 border border-[#f3c1a8]"><div class="anim-bar h-full rounded-full" data-w="53.71" style="width:0;background:#c00022;transition:width .9s ease-out"></div></div>
+                <div class="flex items-center justify-center mb-5">
+                    <button type="button" id="inf4-lbl-m" class="text-sm font-black text-[#ec4e53] transition-colors duration-300 uppercase tracking-wide">Mujeres</button>
+                    <label class="relative inline-flex items-center cursor-pointer mx-3 sm:mx-4">
+                        <input type="checkbox" id="inf4-switch" class="sr-only peer" aria-label="Cambiar entre mujeres y hombres">
+                        <div class="w-16 h-8 bg-[#ec4e53] rounded-full peer peer-focus-visible:ring-4 peer-focus-visible:ring-[#f3c1a8] peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-[#c00022]"></div>
+                    </label>
+                    <button type="button" id="inf4-lbl-h" class="text-sm font-bold text-gray-400 transition-colors duration-300 uppercase tracking-wide">Hombres</button>
                 </div>
-                <div class="mb-5">
-                    <div class="flex justify-between text-sm font-semibold mb-1"><span>Mujeres · niveles altos (4 y 5)</span><span class="text-[#c00022] font-bold">42,68 %</span></div>
-                    <div class="w-full bg-white rounded-full h-3 border border-[#f3c1a8]"><div class="anim-bar h-full rounded-full" data-w="42.68" style="width:0;background:#ec4e53;transition:width .9s ease-out"></div></div>
+
+
+                <div id="inf4-grafica" role="img" aria-label="Porcentaje de estudiantes en cada nivel de preparación, del 1 al 5, según el género seleccionado"></div>
+
+                <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-1 mt-4 text-[11px] font-semibold text-gray-600">
+                    <span class="flex items-center gap-2"><span id="inf4-leg-activo" class="w-3 h-3 rounded-full bg-[#ec4e53]"></span><span id="inf4-leg-activo-txt">Mujeres</span></span>
+                    <span class="flex items-center gap-2"><span class="w-3.5 h-3 rounded-sm border-2 border-dashed border-[#c00022]"></span><span id="inf4-leg-otro-txt">Hombres (referencia)</span></span>
                 </div>
-                <div class="mb-5">
-                    <div class="flex justify-between text-sm font-semibold mb-1"><span>Mujeres · nivel 3</span><span class="text-[#c00022] font-bold">47,77 %</span></div>
-                    <div class="w-full bg-white rounded-full h-3 border border-[#f3c1a8]"><div class="anim-bar h-full rounded-full" data-w="47.77" style="width:0;background:#f3c1a8;transition:width .9s ease-out"></div></div>
-                </div>
+
+                <div id="inf4-resumen" aria-live="polite" class="grid grid-cols-3 gap-2 mt-4"></div>
+                <p class="text-[10px] text-gray-400 mt-3 text-center">Porcentaje de estudiantes en cada nivel (1 = poco preparado, 5 = muy preparado). La silueta punteada muestra al otro género, y bajo cada nivel se indica la diferencia en puntos porcentuales (pp).</p>
             </div>
         </div>
 
         <div class="bg-white/80 p-5 rounded-2xl border border-[#fae6df] mt-8">
             <p class="text-sm text-gray-700 leading-relaxed text-justify">
-                La autopercepción del nivel de preparación para ingresar al mercado laboral presenta diferencias según el género. En los hombres, la tendencia se ubica en el nivel 4, mientras que en las mujeres corresponde al nivel 3, resultado que se refleja en la mediana y la moda de cada grupo. </p>
+                La autopercepción del nivel de preparación para ingresar al mercado laboral presenta diferencias según el género. En los hombres, la tendencia se ubica en el nivel 4, mientras que en las mujeres corresponde al nivel 3, resultado que se refleja en la mediana y la moda de cada grupo. Asimismo, el 53,71 % de los hombres se percibe en los niveles altos de preparación (4 y 5), frente al 42,68 % de las mujeres. En contraste, cerca de la mitad de las mujeres (47,77 %) concentra sus respuestas en el nivel 3. Estos resultados podrían sugerir que los hombres se perciben a sí mismos como más preparados que las mujeres. </p>
         </div>
     </div>
 
@@ -1954,7 +1968,7 @@ los principales desafíos que identifican en relación con las habilidades trans
 
 
 
-            <<!-- Descarga de Informe #04 (Fondo a ancho completo) -->
+            <!-- Descarga de Informe #04 (Fondo a ancho completo) -->
     <section class="relative left-1/2 -ml-[50vw] w-screen py-20 bg-gradient-to-b from-gray-50 to-[#fae6df]/40 border-t border-b border-gray-200 mt-16 mb-8">
         
         <!-- Contenedor interno centrado -->
@@ -2008,7 +2022,7 @@ los principales desafíos que identifican en relación con las habilidades trans
                 </h4>
                 
                 <p class="text-sm text-gray-500 mb-8 leading-relaxed font-light">
-                    Análisis exhaustivo de los desafíos percibidos por los estudiantiles próximos a egresar y la caracterización de los datos recopilados.
+                    Análisis exhaustivo de los desafíos percibidos por los estudiantes próximos a egresar y la caracterización de los datos recopilados.
                 </p>
 
                 <!-- Botón de descarga interactivo -->
@@ -2018,8 +2032,7 @@ los principales desafíos que identifican en relación con las habilidades trans
                 </a>
             </div>
         </div>
-    </section>   
-    </div>     
+    </section>
 </div>
 
 
@@ -2032,7 +2045,10 @@ los principales desafíos que identifican en relación con las habilidades trans
 <style>
     /* Animación de barras del Informe #05 */
     .inf5-anim { transition: width .9s ease-out, height .9s ease-out; }
-    @media (prefers-reduced-motion: reduce) { .inf5-anim { transition: none; } }
+    /* Barras divergentes: se despliegan desde el eje central hacia ambos lados */
+    .div-reveal { clip-path: inset(0 50% 0 50%); transition: clip-path .9s ease-out; }
+    .div-reveal.on { clip-path: inset(0 0 0 0); }
+    @media (prefers-reduced-motion: reduce) { .inf5-anim, .div-reveal { transition: none; } }
 </style>
 
 <div id="tab-content-5" class="tab-content hidden py-12 px-4 sm:px-6 w-full max-w-5xl mx-auto font-sans">
@@ -2057,6 +2073,23 @@ los principales desafíos que identifican en relación con las habilidades trans
         <div class="px-6 md:px-10 pt-8 pb-6 text-center md:text-left">
             <span class="inline-block bg-[#fae6df] text-[#c00022] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-3">Escala de 1 a 5</span>
             <p class="text-gray-600 text-sm leading-relaxed text-justify">Con el fin de dimensionar el nivel de preocupación percibido, se aplicó una pregunta de selección única basada en una escala de valoración de 1 (Poco preocupado) a 5 (Muy preocupado), permitiendo examinar el nivel de preocupación con la que los estudiantes proyectan su trayectoria profesional.</p>
+        </div>
+
+        <!-- Vista comparada: barras divergentes de las tres trayectorias -->
+        <div class="px-6 md:px-10 pb-8">
+            <div class="rounded-2xl border border-[#f3c1a8] bg-[#fae6df]/30 p-5 md:p-6">
+                <div class="flex flex-wrap items-center justify-between gap-3 mb-1">
+                    <h4 class="font-black text-[#000000] text-base">Niveles de preocupación en las tres trayectorias</h4>
+                </div>
+                <p class="text-xs text-gray-600 mb-4">El centro marca el nivel 3 (neutral), repartido a ambos lados del eje. Hacia la izquierda crece la baja preocupación y hacia la derecha la alta.</p>
+                <div class="flex flex-wrap items-center gap-x-5 gap-y-2 mb-5 text-xs font-semibold text-gray-600">
+                    <span class="flex items-center gap-2"><span class="w-4 h-3 rounded-sm" style="background:#f3c1a8"></span>Baja preocupación (1 y 2)</span>
+                    <span class="flex items-center gap-2"><span class="w-4 h-3 rounded-sm" style="background:#fae6df;box-shadow:inset 0 0 0 1px #f3c1a8"></span>Nivel 3 · neutral</span>
+                    <span class="flex items-center gap-2"><span class="w-4 h-3 rounded-sm" style="background:#c00022"></span>Alta preocupación (4 y 5)</span>
+                </div>
+                <div id="inf5-divergente"></div>
+                <p class="text-[10px] text-gray-400 mt-4">Porcentaje de estudiantes de cada trayectoria. El nivel 3 se obtiene por diferencia: total de estudiantes menos los niveles altos y bajos.</p>
+            </div>
         </div>
 
         <div class="flex flex-col sm:flex-row border-y border-gray-200 bg-gray-50" role="tablist" aria-label="Trayectoria">
@@ -2137,7 +2170,7 @@ los principales desafíos que identifican en relación con las habilidades trans
         <div data-panel="emprender" class="p-6 md:p-10 hidden"></div>
     </section>
 
-     <<!-- Descarga de Informe #05 (Fondo a ancho completo) -->
+     <!-- Descarga de Informe #05 (Fondo a ancho completo) -->
     <section class="relative left-1/2 -ml-[50vw] w-screen py-20 bg-gradient-to-b from-gray-50 to-[#fae6df]/40 border-t border-b border-gray-200 mt-16 mb-8">
         
         <!-- Contenedor interno centrado -->
@@ -2191,7 +2224,7 @@ los principales desafíos que identifican en relación con las habilidades trans
                 </h4>
                 
                 <p class="text-sm text-gray-500 mb-8 leading-relaxed font-light">
-                    Análisis exhaustivo de los miedos percibidos por los estudiantiles próximos a egresar y la caracterización de los datos recopilados.
+                    Análisis exhaustivo de los miedos percibidos por los estudiantes próximos a egresar y la caracterización de los datos recopilados.
                 </p>
 
                 <!-- Botón de descarga interactivo -->
@@ -2308,32 +2341,7 @@ los principales desafíos que identifican en relación con las habilidades trans
     </section>
 
 
-    <!-- ============================================================= -->
-    <!-- SECCIÓN 4 · HALLAZGOS GENERALES                               -->
-    <!-- ============================================================= -->
-    <div class="flex items-center gap-3 mb-6 pb-3 border-b border-gray-200">
-        <span class="w-3 h-3 rounded-full bg-[#DF0832] shrink-0"></span>
-        <h3 class="text-xl font-bold text-[#c00022] italic uppercase tracking-wide">Hallazgos generales</h3>
-    </div>
-
-    <section id="inf6-global" class="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100 mb-10">
-        <div class="px-6 md:px-10 pt-8 pb-6 text-center md:text-left">
-            <span class="inline-block bg-[#fae6df] text-[#c00022] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-3">Mirada de conjunto</span>
-            <p class="text-gray-600 text-sm leading-relaxed">Lo que se observa al leer juntas las tres trayectorias.</p>
-        </div>
-
-        <div class="flex flex-col sm:flex-row border-y border-gray-200 bg-gray-50" role="tablist" aria-label="Hallazgo">
-            <button type="button" role="tab" data-tab="preferencias">Preferencias y orientación</button>
-            <button type="button" role="tab" data-tab="acceso">Conocimiento y acceso</button>
-            <button type="button" role="tab" data-tab="genero">Diferencias entre género</button>
-        </div>
-
-        <div data-panel="preferencias" class="p-6 md:p-10"></div>
-        <div data-panel="acceso"       class="p-6 md:p-10 hidden"></div>
-        <div data-panel="genero"       class="p-6 md:p-10 hidden"></div>
-    </section>
-
-         <<!-- Descarga de Informe #05 (Fondo a ancho completo) -->
+         <!-- Descarga de Informe #06 (Fondo a ancho completo) -->
     <section class="relative left-1/2 -ml-[50vw] w-screen py-20 bg-gradient-to-b from-gray-50 to-[#fae6df]/40 border-t border-b border-gray-200 mt-16 mb-8">
         
         <!-- Contenedor interno centrado -->
@@ -2387,7 +2395,7 @@ los principales desafíos que identifican en relación con las habilidades trans
                 </h4>
                 
                 <p class="text-sm text-gray-500 mb-8 leading-relaxed font-light">
-                    Análisis exhaustivo del apoyo institucional para los estudiantiles próximos a egresar y la caracterización de los datos recopilados.
+                    Análisis exhaustivo del apoyo institucional para los estudiantes próximos a egresar y la caracterización de los datos recopilados.
                 </p>
 
                 <!-- Botón de descarga interactivo -->
@@ -2420,6 +2428,27 @@ los principales desafíos que identifican en relación con las habilidades trans
         </div>
     </main>
 
+    <!-- NAVEGACIÓN ENTRE INFORMES (se completa con JavaScript según el informe abierto) -->
+    <section id="informe-nav" class="hidden bg-white border-t border-gray-100 px-4 sm:px-6 py-12 md:py-16" aria-label="Navegación entre informes">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-8">
+                <span class="inline-block bg-[#fae6df] text-[#c00022] text-xs font-bold px-4 py-1.5 rounded-full uppercase tracking-wider mb-3">Continúa el recorrido</span>
+                <p id="informe-nav-pos" class="text-sm text-gray-500 font-medium"></p>
+                <div id="informe-nav-puntos" class="flex flex-wrap justify-center items-center mt-2" role="group" aria-label="Ir directamente a un informe"></div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                <button type="button" id="informe-prev" class="order-2 sm:order-1 group text-left rounded-2xl border-2 border-gray-200 bg-white p-5 md:p-6 transition-all hover:border-[#c00022] hover:shadow-lg hover:-translate-y-0.5"></button>
+                <button type="button" id="informe-next" class="order-1 sm:order-2 group text-left rounded-2xl border-2 border-[#9C0623] bg-[#9C0623] text-white p-5 md:p-6 transition-all hover:bg-[#7A041B] hover:border-[#7A041B] hover:shadow-xl hover:-translate-y-0.5"></button>
+            </div>
+            <div class="text-center mt-6">
+                <button type="button" id="informe-indice" class="inline-flex items-center gap-2 text-sm font-bold text-[#9C0623] hover:text-[#7A041B] underline-offset-4 hover:underline py-2 px-3">
+                    <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 4.5 4 11l1.4 1.4L9 8.8V16h2V8.8l3.6 3.6L16 11z"/></svg>
+                    Volver al índice de informes
+                </button>
+            </div>
+        </div>
+    </section>
+
     <!-- CRÉDITOS REDISEÑADOS -->
     <section class="py-24 px-6 bg-[#FDFBF7] border-t border-gray-200/60 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-[#00A19B]/10 to-transparent rounded-full blur-3xl -translate-y-1/2 translate-x-1/3"></div>
@@ -2450,7 +2479,7 @@ los principales desafíos que identifican en relación con las habilidades trans
                         <img src="img/DSC06220.JPG" alt="Nicolas Rodriguez">
                         <div class="credit-info bg-gradient-to-t from-[#c56a76]/95 to-[#c56a76]/80 p-2">
                             <h4 class="text-[13px] font-black text-white mb-1">Nicolas Rodriguez Cardenas</h4>
-                            <p class="text-[10px] text-gray-100 leading-tight">Estudiante de Ingeniería Electrónica. Gestor de contenido digital y redactor de informes</p>
+                            <p class="text-[10px] text-gray-100 leading-tight">Estudiante de Ingeniería Electrónica. Gestor de contenido digital y redactor de informes.</p>
                         </div>
                     </div>
                 </div>
@@ -2460,8 +2489,8 @@ los principales desafíos que identifican en relación con las habilidades trans
                     <div class="credit-card rounded-2xl aspect-[3/4] shadow-md border-b-4 border-[#d28991] w-full">
                         <img src="img/DSC06228.JPG" alt="Daniel Felipe Contreras">
                         <div class="credit-info bg-gradient-to-t from-[#d28991]/95 to-[#d28991]/80 p-2">
-                            <h4 class="text-[13px] font-black text-white mb-1">Daniel Felipe Contreras Camargo </h4>
-                            <p class="text-[10px] text-gray-100 leading-tight">Estudiante de Ingeniería Química. Analista de Datos</p>
+                            <h4 class="text-[13px] font-black text-white mb-1">Daniel Felipe Contreras Camargo</h4>
+                            <p class="text-[10px] text-gray-100 leading-tight">Estudiante de Ingeniería Química. Analista de Datos.</p>
                         </div>
                     </div>
                 </div>
@@ -2505,7 +2534,7 @@ los principales desafíos que identifican en relación con las habilidades trans
                         <img src="img/DSC06204.JPG" alt="Daniel Bohórquez">
                         <div class="credit-info bg-black/85 p-2">
                             <h4 class="text-[13px] font-black text-white mb-1">Daniel Felipe Bohórquez Calderón</h4>
-                            <p class="text-[10px] text-gray-300">Estudiante de Estadística. Colaborador en diseño del muestreoo</p>
+                            <p class="text-[10px] text-gray-300">Estudiante de Estadística. Colaborador en diseño del muestreo</p>
                         </div>
                     </div>
                 </div>
@@ -2521,80 +2550,103 @@ los principales desafíos que identifican en relación con las habilidades trans
                     </div>
                 </div>
             </div>
-        <!-- SECCIÓN: EQUIPO DE MARKETING (NUEVA LÍNEA) -->
-            <div class="mt-20 text-center">
-                <h3 class="text-xl md:text-2xl font-black text-gray-800 mb-10 inline-block relative">
-                    Equipo de Marketing y Divulgación
-                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-1 bg-[#a10a0a] rounded-full"></div>
-                </h3>
-                
-                <div class="flex flex-wrap justify-center gap-4 lg:gap-3">
-                    
+        <!-- EQUIPO DE MARKETING Y DIVULGACIÓN (discreto) -->
+            <div class="mt-14 flex flex-col items-center">
+                <div class="flex items-center gap-4 w-full max-w-md mb-5">
+                    <span class="h-px flex-1 bg-gray-300/70"></span>
+                    <h3 class="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-500 text-center">Marketing y divulgación</h3>
+                    <span class="h-px flex-1 bg-gray-300/70"></span>
+                </div>
+
+                <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 w-full sm:w-auto">
                     <!-- Nicolás López Gomez (Líder) -->
-                    <div class="flex flex-col w-[calc(50%-0.5rem)] sm:max-w-[160px]">
-                        <span class="text-[10px] font-bold text-[#a10a0a] uppercase tracking-wider mb-2 text-center h-8 flex items-center justify-center border-b-2 border-[#00A19B]/30">Líder Marketing</span>
-                        <div class="credit-card rounded-2xl aspect-[3/4] shadow-md border-b-4 border-[#a10a0a] w-full">
-                            <img src="img/DSC04190.JPG" alt="Nicolás López Gomez">
-                            <div class="credit-info bg-gradient-to-t from-[#a10a0a]/95 to-[#a10a0a]/80 p-2">
-                                <h4 class="text-[13px] font-black text-white mb-1">Nicolás López Gomez</h4>
-                                <p class="text-[10px] text-gray-100 leading-tight">Estudiante de Ingeniería de Sistemas. Líder de Marketing y divulgación.</p>
-                            </div>
+                    <div class="flex items-center gap-3 bg-white rounded-full pl-1.5 pr-6 py-1.5 border border-gray-200 shadow-sm">
+                        <img src="img/DSC04190.JPG" alt="Nicolás López Gomez" class="w-12 h-12 rounded-full object-cover object-top shrink-0 border-2 border-[#a10a0a]/70">
+                        <div class="text-left min-w-0">
+                            <h4 class="text-[13px] font-black text-gray-800 leading-tight">Nicolás López Gomez</h4>
+                            <p class="text-[10px] font-bold text-[#a10a0a] uppercase tracking-wide leading-tight mt-0.5">Líder de Marketing y divulgación</p>
+                            <p class="text-[10px] text-gray-500 leading-tight">Estudiante de Ingeniería de Sistemas</p>
                         </div>
                     </div>
 
                     <!-- Juana Valentina Angel Peñuela -->
-                    <div class="flex flex-col w-[calc(50%-0.5rem)] sm:max-w-[160px]">
-                        <span class="text-[10px] font-bold text-[#a10a0a] uppercase tracking-wider mb-2 text-center h-8 flex items-center justify-center border-b-2 border-[#00A19B]/30">Marketing</span>
-                        <div class="credit-card rounded-2xl aspect-[3/4] shadow-md border-b-4 border-[#a10a0a] w-full">
-                            <img src="img/DSC04192.JPG" alt="Juana Valentina Angel Peñuela">
-                            <div class="credit-info bg-gradient-to-t from-[#a10a0a]/95 to-[#a10a0a]/80 p-2">
-                                <h4 class="text-[13px] font-black text-white mb-1">Juana Valentina Angel Peñuela</h4>
-                                <p class="text-[10px] text-gray-100 leading-tight">Estudiante de Geografía y Cine y Televisión. Marketing y divulgación.</p>
-                            </div>
+                    <div class="flex items-center gap-3 bg-white rounded-full pl-1.5 pr-6 py-1.5 border border-gray-200 shadow-sm">
+                        <img src="img/DSC04192.JPG" alt="Juana Valentina Angel Peñuela" class="w-12 h-12 rounded-full object-cover object-top shrink-0 border-2 border-[#a10a0a]/70">
+                        <div class="text-left min-w-0">
+                            <h4 class="text-[13px] font-black text-gray-800 leading-tight">Juana Valentina Angel Peñuela</h4>
+                            <p class="text-[10px] font-bold text-[#a10a0a] uppercase tracking-wide leading-tight mt-0.5">Marketing y divulgación</p>
+                            <p class="text-[10px] text-gray-500 leading-tight">Estudiante de Geografía y Cine y Televisión</p>
                         </div>
                     </div>
-
                 </div>
             </div>
-            
+
         </div>
     </section>
 
     <!-- SECCIÓN DE REDES SOCIALES (FOOTER) -->
-    <footer class="bg-gray-50 border-t border-gray-200 py-10 px-6 mt-16 w-full">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            
-            <!-- Información Izquierda -->
-            <div class="text-center md:text-left">
-                <p class="text-[#9c0623] font-black text-lg tracking-wider uppercase font-['Ancizar_Sans',sans-serif]">unLEMA | LEPP</p>
-                <p class="text-gray-500 text-sm mt-1">Laboratorio Estudiantil de Proyección Profesional</p>
-                <p class="text-gray-400 text-xs mt-1">Universidad Nacional de Colombia - Sede Bogotá</p>
+    <footer id="conoce-proyecto" class="relative overflow-hidden bg-[#9c0623] text-white mt-16 w-full">
+        <!-- Franja con los colores unLEMA -->
+        <div class="grid grid-cols-6 h-2" aria-hidden="true">
+            <div class="color-box-1"></div><div class="color-box-2"></div><div class="color-box-3"></div>
+            <div class="color-box-4"></div><div class="color-box-5"></div><div class="color-box-6"></div>
+        </div>
+        <div class="pointer-events-none absolute -top-24 -right-24 w-96 h-96 rounded-full bg-[#ff3735]/25 blur-3xl" aria-hidden="true"></div>
+        <div class="pointer-events-none absolute -bottom-32 -left-24 w-96 h-96 rounded-full bg-[#fae6df]/10 blur-3xl" aria-hidden="true"></div>
+
+        <div class="relative max-w-6xl mx-auto px-6 pt-14 pb-8 md:pt-20">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-10 lg:gap-14 items-center">
+
+                <!-- Invitación -->
+                <div class="lg:col-span-2 text-center lg:text-left">
+                    <span class="inline-block bg-[#fae6df] text-[#9c0623] text-xs font-extrabold px-4 py-1.5 rounded-full uppercase tracking-widest mb-4">Conoce el proyecto</span>
+                    <h2 class="text-3xl md:text-4xl font-black leading-tight mb-4">Sigue de cerca el camino de unLEMA</h2>
+                    <p class="text-base leading-relaxed text-white/85 mb-7 max-w-md mx-auto lg:mx-0">
+                        Entérate de los resultados, las actividades y las novedades del Laboratorio Estudiantil de Proyección Profesional y del Área de Acompañamiento Integral de la Sede Bogotá.
+                    </p>
+                    <button type="button" id="footer-ver-informes" class="inline-flex items-center justify-center gap-2 bg-white text-[#9c0623] font-bold text-sm uppercase tracking-wide px-6 py-3.5 rounded-xl shadow-lg hover:bg-[#fae6df] transition-colors">
+                        Explorar los informes
+                        <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 4.5 4 11l1.4 1.4L9 8.8V16h2V8.8l3.6 3.6L16 11z"/></svg>
+                    </button>
+                </div>
+
+                <!-- Redes -->
+                <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-5">
+                    <a href="https://www.instagram.com/unlema.unal/" target="_blank" rel="noopener noreferrer" class="group flex flex-col rounded-3xl bg-white/10 border border-white/25 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-2xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center shadow-lg shrink-0 group-hover:scale-105 transition-transform"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+                            <div class="min-w-0">
+                                <p class="text-lg font-black leading-tight text-white group-hover:text-[#9c0623] transition-colors">unLEMA</p>
+                                <p class="text-[13px] sm:text-sm font-semibold text-[#f3c1a8] group-hover:text-[#c00022] transition-colors [overflow-wrap:anywhere]">@unlema.unal</p>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-relaxed text-white/85 group-hover:text-gray-600 transition-colors mb-5">Conoce al equipo, los resultados de la encuesta de expectativas de egreso y las novedades del laboratorio.</p>
+                        <span class="mt-auto inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-[#c00022] transition-colors">Seguir en Instagram <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M11.6 4.6 10.2 6l3 3H3v2h10.2l-3 3 1.4 1.4L17 10z"/></svg></span>
+                    </a>
+                    <a href="https://www.instagram.com/aaiunal/" target="_blank" rel="noopener noreferrer" class="group flex flex-col rounded-3xl bg-white/10 border border-white/25 p-6 backdrop-blur-sm transition-all duration-300 hover:bg-white hover:-translate-y-1 hover:shadow-2xl">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white flex items-center justify-center shadow-lg shrink-0 group-hover:scale-105 transition-transform"><svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
+                            <div class="min-w-0">
+                                <p class="text-lg font-black leading-tight text-white group-hover:text-[#9c0623] transition-colors">Acompañamiento Integral</p>
+                                <p class="text-[13px] sm:text-sm font-semibold text-[#f3c1a8] group-hover:text-[#c00022] transition-colors [overflow-wrap:anywhere]">@acompanamientounal_bog</p>
+                            </div>
+                        </div>
+                        <p class="text-sm leading-relaxed text-white/85 group-hover:text-gray-600 transition-colors mb-5">Programas, actividades y servicios del Área de Acompañamiento Integral de la Sede Bogotá.</p>
+                        <span class="mt-auto inline-flex items-center gap-2 text-sm font-bold text-white group-hover:text-[#c00022] transition-colors">Seguir en Instagram <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M11.6 4.6 10.2 6l3 3H3v2h10.2l-3 3 1.4 1.4L17 10z"/></svg></span>
+                    </a>
+                </div>
             </div>
 
-            <!-- Redes Sociales (Derecha) -->
-            <div class="flex flex-col sm:flex-row gap-4 items-center">
-                <span class="text-sm font-bold text-gray-400 uppercase tracking-widest md:hidden">Nuestras Redes</span>
-                
-                <!-- Instagram Acompañamiento Integral -->
-                <a href="https://www.instagram.com/acompanamientounal_bog/" target="_blank" class="group flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200 hover:border-[#c00022] hover:shadow-md transition-all duration-300">
-                    <div class="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white p-1.5 rounded-full group-hover:scale-110 transition-transform">
-                        <i data-lucide="instagram" class="w-4 h-4"></i>
-                    </div>
-                    <span class="text-sm font-bold text-gray-700 group-hover:text-[#c00022] transition-colors">Acompañamiento Integral</span>
-                </a>
-
-                <!-- Instagram unLEMA -->
-                <a href="https://www.instagram.com/unlema.unal/" target="_blank" class="group flex items-center gap-3 bg-white px-6 py-3 rounded-full shadow-sm border border-gray-200 hover:border-[#c00022] hover:shadow-md transition-all duration-300">
-                    <div class="bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white p-1.5 rounded-full group-hover:scale-110 transition-transform">
-                        <i data-lucide="instagram" class="w-4 h-4"></i>
-                    </div>
-                    <span class="text-sm font-bold text-gray-700 group-hover:text-[#c00022] transition-colors">unLEMA</span>
-                </a>
+            <!-- Identidad -->
+            <div class="mt-12 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center gap-2 text-center md:text-left">
+                <p class="font-black text-base tracking-wider uppercase">unLEMA | LEPP</p>
+                <p class="text-sm text-white/80">Laboratorio Estudiantil de Proyección Profesional</p>
+                <p class="text-xs text-white/60">Universidad Nacional de Colombia - Sede Bogotá</p>
             </div>
         </div>
     </footer>
 
-    <footer class="py-8 text-center text-gray-400 text-[10px] tracking-widest uppercase border-t bg-gray-50/50">
+    <footer class="py-6 px-6 text-center text-white/70 text-[10px] tracking-widest uppercase bg-[#7a041b]">
         <p>Universidad Nacional de Colombia | unLEMA | Red de Acompañamiento Integral REDai 2026</p>
     </footer>
 
@@ -2634,6 +2686,8 @@ los principales desafíos que identifican en relación con las habilidades trans
                 }
             }, 50);
         }
+
+        if (typeof actualizarNavInformes === 'function') actualizarNavInformes(tabIndex);
 
         if(doScroll) {
             const anchor = document.getElementById('contenido-informes');
@@ -2768,7 +2822,7 @@ los principales desafíos que identifican en relación con las habilidades trans
                     options: {
                         responsive: true, maintainAspectRatio: false,
                         plugins: {
-                            legend: { position: 'right', labels: { font: { family: "'Montserrat', sans-serif", size: 13, weight: '500' }, color: '#374151', padding: 20, usePointStyle: true, pointStyle: 'circle' } },
+                            legend: { position: (window.innerWidth < 640 ? 'bottom' : 'right'), labels: { font: { family: "'Montserrat', sans-serif", size: 13, weight: '500' }, color: '#374151', padding: 20, usePointStyle: true, pointStyle: 'circle' } },
                             tooltip: {
                                 backgroundColor: 'rgba(17, 24, 39, 0.9)', padding: 14, titleFont: { family: "'Montserrat', sans-serif", size: 14, weight: 'bold' }, bodyFont: { family: "'Montserrat', sans-serif", size: 13 }, cornerRadius: 8,
                                 callbacks: {
@@ -3397,13 +3451,15 @@ var SVG_HOMBRE = '<svg viewBox="0 0 64 100" class="w-16 h-24 mx-auto" fill="curr
 
 /* Anima barras: ancho (data-w, en %) o alto (data-h, en px) */
 function reanimar(raiz) {
-    var els = raiz.querySelectorAll('[data-w],[data-h]');
+    var els = raiz.querySelectorAll('[data-w],[data-h],[data-div]');
     Array.prototype.forEach.call(els, function (e) {
-        if (e.hasAttribute('data-w')) e.style.width = '0%'; else e.style.height = '0px';
+        if (e.hasAttribute('data-div')) e.classList.remove('on');
+        else if (e.hasAttribute('data-w')) e.style.width = '0%'; else e.style.height = '0px';
     });
     requestAnimationFrame(function () { requestAnimationFrame(function () {
         Array.prototype.forEach.call(els, function (e) {
-            if (e.hasAttribute('data-w')) e.style.width = e.getAttribute('data-w') + '%';
+            if (e.hasAttribute('data-div')) e.classList.add('on');
+            else if (e.hasAttribute('data-w')) e.style.width = e.getAttribute('data-w') + '%';
             else e.style.height = e.getAttribute('data-h') + 'px';
         });
     }); });
@@ -3448,9 +3504,74 @@ function cajaTexto(texto) {
 /* ================================================================
    SECCIÓN 1 · NIVEL DE PREOCUPACIÓN
    ================================================================ */
-function panelNivel(clave) {
+/* ---- Barras divergentes (nivel de preocupación) ----
+   Eje central = nivel 3 (neutral, repartido mitad a cada lado). Izquierda = baja (1 y 2). Derecha = alta (4 y 5).
+   ESC = porcentaje que representa cada mitad del eje. */
+var ESC = 80;
+var COL_BAJA = '#f3c1a8', COL_MEDIA = '#fae6df', COL_ALTA = '#c00022';
+function px(p) { return p / ESC * 50; }                       // % del ancho de la pista
+
+function datosNivel(clave) {
     var d = DATOS_NIVEL[clave], media = d.n - d.alta - d.baja;
-    var wB = pct(d.baja, d.n), wM = pct(media, d.n), wA = pct(d.alta, d.n);
+    return { n: d.n, cb: d.baja, cm: media, ca: d.alta, b: pct(d.baja, d.n), m: pct(media, d.n), a: pct(d.alta, d.n), pb: d.pBaja, pa: d.pAlta };
+}
+
+function divPista(q, alto) {
+    var mit = q.m / 2;
+    var xb = 50 - px(mit) - px(q.b), wb = px(q.b);
+    var xm = 50 - px(mit),           wm = px(q.m);
+    var xa = 50 + px(mit),           wa = px(q.a);
+    function seg(x, w, color, cls, titulo) {
+        return '<div class="absolute top-0 bottom-0 ' + cls + '" style="left:' + x.toFixed(2) + '%;width:' + w.toFixed(2) + '%;background:' + color + '" title="' + titulo + '"></div>';
+    }
+    var rejilla = [0, 12.5, 25, 37.5, 62.5, 75, 87.5, 100].map(function (x) {
+        return '<div class="absolute top-0 bottom-0 border-l border-dashed border-[#f3c1a8]/70" style="left:' + x + '%"></div>';
+    }).join('');
+    return '<div class="relative ' + alto + ' rounded-lg bg-white border border-[#fae6df]">' + rejilla +
+             '<div data-div class="div-reveal absolute inset-0">' +
+               seg(xb, wb, COL_BAJA,  'rounded-l-md', 'Baja (1 y 2): ' + q.pb + ' · ' + q.cb + ' estudiantes') +
+               seg(xm, wm, COL_MEDIA, 'shadow-[inset_0_0_0_1px_#f3c1a8]', 'Nivel 3: ' + fmt(q.m, 1) + ' % · ' + q.cm + ' estudiantes') +
+               seg(xa, wa, COL_ALTA,  'rounded-r-md', 'Alta (4 y 5): ' + q.pa + ' · ' + q.ca + ' estudiantes') +
+             '</div>' +
+             '<div class="absolute -top-1 -bottom-1 w-0.5 bg-[#9c0623]/70 -translate-x-1/2 rounded" style="left:50%"></div>' +
+           '</div>';
+}
+
+function divEje() {
+    return '<div class="relative h-5 mt-1.5 text-[10px] text-gray-400">' +
+        [-4, -3, -2, -1, 0, 1, 2, 3, 4].map(function (i) {
+            var x = 50 + i * 12.5, t = Math.abs(i) * 20;
+            var cls = i === -4 ? '' : (i === 4 ? '-translate-x-full' : '-translate-x-1/2');
+            var oculta = (Math.abs(i) === 1 || Math.abs(i) === 3) ? ' hidden sm:inline' : '';
+            return '<span class="absolute whitespace-nowrap ' + cls + oculta + (i === 0 ? ' font-bold text-gray-600' : '') + '" style="left:' + x + '%">' + t + (i === 0 ? '' : ' %') + '</span>';
+        }).join('') + '</div>';
+}
+
+function divValores(q, conteo) {
+    function it(color, borde, nombre, valor, n, alin) {
+        return '<div class="' + alin + ' min-w-0"><span class="inline-flex items-center gap-1.5 text-gray-600"><span class="w-2.5 h-2.5 rounded-sm shrink-0" style="background:' + color + (borde ? ';box-shadow:inset 0 0 0 1px #f3c1a8' : '') + '"></span>' + nombre + '</span>' +
+               '<strong class="block text-sm text-[#c00022] leading-tight">' + valor + '</strong>' + (conteo ? '<span class="block text-gray-400">' + n + ' est.</span>' : '') + '</div>';
+    }
+    return '<div class="grid grid-cols-3 gap-x-2 mt-2.5 text-[11px]">' +
+        it(COL_BAJA, false, 'Baja', q.pb, q.cb, 'text-left') + it(COL_MEDIA, true, 'Nivel 3', fmt(q.m, 1) + ' %', q.cm, 'text-center') + it(COL_ALTA, false, 'Alta', q.pa, q.ca, 'text-right') + '</div>';
+}
+
+function divGeneral() {
+    var filas = CLAVES.map(function (k) {
+        var q = datosNivel(k), t = TRAYECTORIAS[k];
+        return '<div class="grid grid-cols-1 sm:grid-cols-[9.5rem_1fr] gap-x-4 gap-y-2 items-center">' +
+                 '<div class="font-bold text-sm text-[#000000] flex items-center gap-2"><i data-lucide="' + t.icono + '" class="w-4 h-4 text-[#ec4e53] shrink-0"></i><span>' + t.nombre + '<span class="block text-[11px] font-semibold text-gray-500">n = ' + q.n + '</span></span></div>' +
+                 '<div class="min-w-0">' + divPista(q, 'h-9') + divValores(q, false) + '</div>' +
+               '</div>';
+    }).join('<div class="h-4"></div>');
+    var cabeza = '<div class="grid grid-cols-1 sm:grid-cols-[9.5rem_1fr] gap-x-4 mb-2"><div class="hidden sm:block"></div>' +
+        '<div class="flex justify-between gap-3 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-gray-500"><span>Menos preocupación</span><span class="text-right">Más preocupación</span></div></div>';
+    var eje = '<div class="grid grid-cols-1 sm:grid-cols-[9.5rem_1fr] gap-x-4 mt-3"><div class="hidden sm:block"></div><div>' + divEje() + '</div></div>';
+    return cabeza + filas + eje;
+}
+
+function panelNivel(clave) {
+    var d = DATOS_NIVEL[clave], q = datosNivel(clave), media = q.cm;
 
     function tile(titulo, valor, detalle, color, oscuro) {
         return '<div class="rounded-2xl p-5 text-center border ' + (oscuro ? 'bg-[#c00022] border-[#c00022] text-white' : 'bg-white border-[#f3c1a8] text-[#000000]') + '">' +
@@ -3464,16 +3585,15 @@ function panelNivel(clave) {
     return cabecera(clave, chip('n = ' + d.n + ' estudiantes')) +
         '<div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">' +
             tile('Baja preocupación (1 y 2)', d.pBaja, d.baja + ' estudiantes', '#f3c1a8', false) +
-            tile('Nivel 3', fmt(wM, 1) + ' %', media + ' estudiantes*', '#ec4e53', false) +
+            tile('Nivel 3', fmt(q.m, 1) + ' %', media + ' estudiantes*', '#ec4e53', false) +
             tile('Alta preocupación (4 y 5)', d.pAlta, d.alta + ' estudiantes', '#c00022', true) +
         '</div>' +
-        '<div class="mb-2 flex justify-between text-[11px] font-semibold text-gray-500"><span>1 · Poco preocupado</span><span>5 · Muy preocupado</span></div>' +
-        '<div class="flex w-full h-8 rounded-xl overflow-hidden border border-[#fae6df] mb-2" role="img" aria-label="Distribución de la preocupación: baja ' + fmt(wB, 1) + ' %, nivel 3 ' + fmt(wM, 1) + ' %, alta ' + fmt(wA, 1) + ' %">' +
-            '<div class="inf5-anim h-full" data-w="' + wB.toFixed(2) + '" style="width:0%;background:#f3c1a8" title="Baja (1 y 2): ' + d.baja + ' estudiantes"></div>' +
-            '<div class="inf5-anim h-full" data-w="' + wM.toFixed(2) + '" style="width:0%;background:#ec4e53" title="Nivel 3: ' + media + ' estudiantes"></div>' +
-            '<div class="inf5-anim h-full" data-w="' + wA.toFixed(2) + '" style="width:0%;background:#c00022" title="Alta (4 y 5): ' + d.alta + ' estudiantes"></div>' +
+        '<div class="rounded-2xl border border-[#f3c1a8] bg-white p-4 md:p-5 mb-3">' +
+            '<div class="mb-2 flex justify-between gap-3 text-[11px] font-semibold text-gray-500"><span>1 · Poco preocupado</span><span>5 · Muy preocupado</span></div>' +
+            '<div role="img" aria-label="Barra divergente: baja preocupación ' + d.pBaja + ', nivel 3 ' + fmt(q.m, 1) + ' %, alta preocupación ' + d.pAlta + '">' + divPista(q, 'h-12') + '</div>' +
+            divEje() + divValores(q, true) +
         '</div>' +
-        '<p class="text-[10px] text-gray-400 mb-6">* El nivel 3 se obtiene por diferencia: total de estudiantes menos los niveles altos y bajos.</p>' +
+        '<p class="text-[10px] text-gray-400 mb-6">* El nivel 3 se obtiene por diferencia: total de estudiantes menos los niveles altos y bajos. En la barra se reparte mitad a cada lado del eje central.</p>' +
         cajaTexto(d.texto);
 }
 
@@ -3689,6 +3809,7 @@ CLAVES.forEach(function (k) {
     sGen.querySelector('[data-panel="' + k + '"]').innerHTML   = panelGenero(k);
 });
 $('inf5-mancuerna').innerHTML = mancuerna();
+var divCont = $('inf5-divergente'); if (divCont) divCont.innerHTML = divGeneral();
 
 CLAVES.forEach(function (k) { iniciarFactores(k, sFact.querySelector('[data-panel="' + k + '"]')); });
 
@@ -3770,25 +3891,6 @@ var T3 = {
         texto: 'La percepción sobre las herramientas proporcionadas por la Universidad para valorar y establecer tarifas competitivas en proyectos y emprendimientos se concentra principalmente en una posición intermedia. El nivel 3 reúne la mayor proporción de respuestas, lo que sugiere que una parte importante de los estudiantes no identifica una valoración claramente favorable ni desfavorable frente a este aporte institucional. Al considerar los niveles favorables (1 y 2) y desfavorables (4 y 5), se observa una mayor proporción de valoraciones favorables, aunque persiste un grupo relevante de estudiantes que se mantiene en una posición intermedia.' }
 };
 
-/* ---- Sección 4 · hallazgos generales ----
-   OJO: 26 de 522 = 4,98 %. Con 5,0 % la suma sería 100 %; el texto dice 4,0 %. Verifica. */
-var T4 = {
-    futuro: [
-        { nombre: 'Trayectoria laboral',     v: 63.6, pct: '63,6 %', color: '#c00022', icono: 'briefcase' },
-        { nombre: 'Estudios de posgrado',    v: 31.4, pct: '31,4 %', color: '#ec4e53', icono: 'book-open' },
-        { nombre: 'Emprendimiento',          v: 4.0,  pct: '4,0 %',  color: '#f3c1a8', icono: 'rocket' }
-    ],
-    noBusco: [   /* de cada 10 que NO buscaron asesoría (aproximado, según el texto) */
-        { nombre: 'Laboral',       de10: 7, icono: 'briefcase' },
-        { nombre: 'Académica',     de10: 7, icono: 'book-open' },
-        { nombre: 'Emprendimiento', de10: 8, icono: 'rocket' }
-    ],
-    textoPreferencias: 'La trayectoria laboral constituye la principal opción de futuro entre los estudiantes consultados (63,6 %), seguida por la continuidad de estudios de posgrado (31,4 %) y, en menor proporción, el emprendimiento (4,0 %). En las tres trayectorias se observa una baja búsqueda de asesoría u orientación específica: aproximadamente 7 de cada 10 estudiantes en las opciones laboral y académica, y 8 de cada 10 en emprendimiento, reportaron no haber buscado este tipo de apoyo. En contraste, entre quienes proyectan su trayectoria laboral, los talleres muestran una participación mayor que la observada en la búsqueda de asesorías individuales.',
-    textoAcceso: 'Entre quienes no habían buscado orientación, la principal razón reportada fue el desconocimiento de la existencia de las asesorías. La incompatibilidad de horarios y la falta de interés presentaron una frecuencia considerablemente menor. En conjunto, este patrón señala que, entre los estudiantes consultados, la visibilidad de los servicios constituye un aspecto relevante para su acceso, más que una ausencia generalizada de interés por recibir orientación.',
-    textoGenero: 'Como parte del análisis descriptivo previo, se realizó la segmentación de los principales resultados por género. Al contrastar las distribuciones obtenidas con los resultados globales, no se observaron diferencias descriptivas relevantes que modifican los principales patrones identificados en el análisis general. En consecuencia, y con el propósito de mantener el foco del informe en los hallazgos más relevantes, los resultados desagregados por género no se presentan en el presente informe.'
-};
-
-
 /* ================================================================
    UTILIDADES
    ================================================================ */
@@ -3800,9 +3902,6 @@ var REDUCIR  = window.matchMedia && window.matchMedia('(prefers-reduced-motion: 
 function $(id) { return document.getElementById(id); }
 function fmt(x, d) { return Number(x).toFixed(d === undefined ? 1 : d).replace('.', ','); }
 function lista(nodes) { return Array.prototype.slice.call(nodes); }
-
-var SVG_MUJER = '<svg viewBox="0 0 64 100" class="w-14 h-20 mx-auto" fill="currentColor" role="img" aria-label="Figura de mujer"><circle cx="32" cy="14" r="11"/><path d="M32 28c-7 0-12 4-13 11L8 70h14v26a4 4 0 0 0 4 4h2a2 2 0 0 0 2-2V74h4v24a2 2 0 0 0 2 2h2a4 4 0 0 0 4-4V70h14L45 39c-1-7-6-11-13-11z"/></svg>';
-var SVG_HOMBRE = '<svg viewBox="0 0 64 100" class="w-14 h-20 mx-auto" fill="currentColor" role="img" aria-label="Figura de hombre"><circle cx="32" cy="14" r="11"/><path d="M18 30h28a8 8 0 0 1 8 8v28a4 4 0 0 1-8 0V46h-2v50a4 4 0 0 1-4 4h-2a2 2 0 0 1-2-2V68h-4v30a2 2 0 0 1-2 2h-2a4 4 0 0 1-4-4V46h-2v20a4 4 0 0 1-8 0V38a8 8 0 0 1 8-8z"/></svg>';
 
 /* Animación de entrada: barras (data-w / data-h), anillos (data-d), figuras (data-pop), cifras (data-count) */
 function contar(el) {
@@ -4105,60 +4204,10 @@ function panelTarifas() {
 
 
 /* ================================================================
-   SECCIÓN 4 · HALLAZGOS GENERALES
-   ================================================================ */
-function panelPreferencias() {
-    var fut = T4.futuro;
-    var leyenda = fut.map(function (f) {
-        return '<div class="flex items-center gap-3"><span class="w-9 h-9 rounded-full flex items-center justify-center shrink-0 text-white" style="background:' + f.color + '"><i data-lucide="' + f.icono + '" class="w-4 h-4"></i></span>' +
-               '<div class="text-sm"><strong class="text-[#000000]">' + f.nombre + '</strong><br><span class="font-black text-[#c00022] text-lg">' + f.pct + '</span></div></div>';
-    }).join('');
-    var filas = T4.noBusco.map(function (r) {
-        return '<div class="flex flex-wrap items-center gap-x-4 gap-y-1">' +
-                 '<div class="w-36 shrink-0 text-sm font-bold text-[#000000] flex items-center gap-2"><i data-lucide="' + r.icono + '" class="w-4 h-4 text-[#ec4e53]"></i>' + r.nombre + '</div>' +
-                 personas([{ n: r.de10, color: '#c00022', titulo: 'No buscó asesoría' }, { n: 10 - r.de10, color: '#f3c1a8', titulo: 'Sí buscó' }], 'w-5 h-8', 'gap-1') +
-                 '<span class="text-sm font-black text-[#c00022]">≈ ' + r.de10 + ' de 10</span></div>';
-    }).join('<div class="h-2"></div>');
-
-    return titulo('compass', 'Preferencias de futuro y búsqueda de orientación') +
-      '<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">' +
-        '<div class="rounded-2xl border border-[#f3c1a8] bg-[#fae6df]/30 p-5 md:p-6">' +
-          '<h5 class="font-black text-[#000000] mb-4">Principal opción de futuro</h5>' +
-          apilada(fut.map(function (f) { return { v: f.v, color: f.color, etiqueta: f.nombre + ': ' + f.pct }; }), 'h-10') +
-          '<div class="space-y-4 mt-5">' + leyenda + '</div></div>' +
-        '<div class="rounded-2xl border border-[#f3c1a8] bg-[#fae6df]/30 p-5 md:p-6">' +
-          '<h5 class="font-black text-[#000000] mb-1">No buscaron asesoría ni orientación</h5>' +
-          '<p class="text-[11px] text-gray-500 mb-4">Aproximado, de cada 10 estudiantes de cada trayectoria.</p>' + filas + '</div>' +
-      '</div>' + cajaTexto(T4.textoPreferencias);
-}
-
-function panelAcceso() {
-    var r = T1.razones;
-    return titulo('search', 'Conocimiento y acceso a los servicios') +
-      '<div class="rounded-2xl border border-[#f3c1a8] bg-[#fae6df]/30 p-5 md:p-6 mb-6">' +
-        '<p class="text-xs font-bold uppercase tracking-wider text-gray-500 mb-4">Razones de quienes no habían buscado orientación (trayectoria laboral)</p>' +
-        barras(r.slice(0, 3)) + '</div>' +
-      '<div class="flex items-start gap-3 rounded-2xl bg-[#c00022] text-white p-5 mb-6">' +
-        '<i data-lucide="eye" class="w-6 h-6 shrink-0 mt-0.5"></i>' +
-        '<p class="text-sm md:text-base font-semibold leading-snug">La visibilidad de los servicios pesa más que la falta de interés por recibir orientación.</p></div>' +
-      cajaTexto(T4.textoAcceso);
-}
-
-function panelGenero() {
-    return titulo('users', 'Diferencias entre género') +
-      '<div class="rounded-2xl border border-[#f3c1a8] bg-[#fae6df]/30 p-6 mb-6 flex items-center justify-center gap-6 md:gap-10">' +
-        '<div class="text-center" style="color:#ec4e53">' + SVG_MUJER + '<div class="text-xs font-bold text-[#000000] mt-1">Mujeres</div></div>' +
-        '<div class="text-center"><div class="text-5xl font-black text-[#c00022] leading-none">=</div><div class="text-[11px] font-semibold text-gray-600 mt-2 max-w-[9rem]">Sin diferencias descriptivas relevantes</div></div>' +
-        '<div class="text-center" style="color:#c00022">' + SVG_HOMBRE + '<div class="text-xs font-bold text-[#000000] mt-1">Hombres</div></div>' +
-      '</div>' + cajaTexto(T4.textoGenero);
-}
-
-
-/* ================================================================
    ARRANQUE
    ================================================================ */
-var s1 = $('inf6-trabajo'), s2 = $('inf6-estudios'), s3 = $('inf6-emprender'), s4 = $('inf6-global');
-if (!s1 || !s2 || !s3 || !s4) return;
+var s1 = $('inf6-trabajo'), s2 = $('inf6-estudios'), s3 = $('inf6-emprender');
+if (!s1 || !s2 || !s3) return;
 
 function poner(sec, clave, html) { sec.querySelector('[data-panel="' + clave + '"]').innerHTML = html; }
 
@@ -4174,14 +4223,11 @@ poner(s3, 'espiritu', panelEspiritu());
 poner(s3, 'contacto', panelContacto());
 poner(s3, 'tarifas', panelTarifas());
 
-poner(s4, 'preferencias', panelPreferencias());
-poner(s4, 'acceso', panelAcceso());
-poner(s4, 'genero', panelGenero());
 
-montarTabs(s1); montarTabs(s3); montarTabs(s4);
+montarTabs(s1); montarTabs(s3);
 
 /* Las animaciones corren cuando cada sección entra en pantalla */
-var secciones = [s1, s2, s3, s4];
+var secciones = [s1, s2, s3];
 if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (entries) {
         entries.forEach(function (e) { if (e.isIntersecting) { reanimar(e.target); io.unobserve(e.target); } });
@@ -4198,6 +4244,189 @@ if (typeof lucide !== 'undefined') { lucide.createIcons(); }
 }
 })();
 
+</script>
+
+<script>
+/* ================================================================
+   INFORME #04 · Distribución Likert por género (con interruptor)
+   ================================================================ */
+(function () {
+try {
+    /* ---- DATOS ----------------------------------------------------------
+       v = % de estudiantes en cada nivel de preparación laboral (1, 2, 3, 4, 5).
+       Reales y ya publicados: Mujeres nivel 3 = 47,77 · Mujeres 4+5 = 42,68 · Hombres 4+5 = 53,71.
+       Los demás valores son PROVISIONALES: reemplázalos por los del informe
+       y cambia  provisional  a false para ocultar el aviso.                   */
+    var DATOS = {
+        provisional: true,
+        m: { nombre: 'Mujeres', color: '#ec4e53', v: [3.18, 6.37, 47.77, 28.03, 14.65],
+             mediana: '3', moda: '3', altos: '42,68 %' },
+        h: { nombre: 'Hombres', color: '#c00022', v: [5.14, 9.14, 32.01, 36.57, 17.14],
+             mediana: '4', moda: '4', altos: '53,71 %' }
+    };
+
+    var raiz = document.getElementById('inf4-grafica');
+    var sw = document.getElementById('inf4-switch');
+    if (!raiz || !sw) return;
+
+    var ALTO = 190, ALTO_MAX = 170;
+    var maxV = Math.max.apply(null, DATOS.m.v.concat(DATOS.h.v));
+    var tope = Math.ceil(maxV / 10) * 10;
+    function fmt(x, d) { return Number(x).toFixed(d === undefined ? 1 : d).replace('.', ','); }
+    function alto(v) { return (v / tope * ALTO_MAX).toFixed(1); }
+
+    var ticks = [0, tope / 2, tope];
+    var ejeY = ticks.map(function (t) {
+        return '<span class="absolute right-2 text-[10px] text-gray-400 -translate-y-1/2" style="bottom:' + (t / tope * ALTO_MAX) + 'px">' + fmt(t, 0) + '%</span>';
+    }).join('');
+    var rejilla = ticks.slice(1).map(function (t) {
+        return '<div class="absolute inset-x-0 border-t border-dashed border-gray-200" style="bottom:' + (t / tope * ALTO_MAX) + 'px"></div>';
+    }).join('');
+
+    var cols = '', pies = '';
+    for (var i = 0; i < 5; i++) {
+        cols += '<div class="relative flex-1 h-full">' +
+                  '<div data-ghost="' + i + '" class="absolute bottom-0 inset-x-0 rounded-t-md border-2 border-dashed" style="height:0px;transition:height .6s ease, border-color .4s ease"></div>' +
+                  '<div data-bar="' + i + '" class="absolute bottom-0 left-[14%] right-[14%] rounded-t-md" style="height:0px;transition:height .6s ease, background-color .4s ease">' +
+                    '<span data-val="' + i + '" class="absolute left-1/2 -translate-x-1/2 bottom-full mb-1 px-0.5 rounded bg-white/85 text-[10px] sm:text-xs font-black whitespace-nowrap"></span>' +
+                  '</div>' +
+                '</div>';
+        pies += '<div class="flex-1 text-center"><div class="text-sm font-black text-[#000000]">' + (i + 1) + '</div><div data-dif="' + i + '" class="text-[10px] sm:text-[11px] font-semibold leading-tight whitespace-nowrap"></div></div>';
+    }
+
+    raiz.innerHTML =
+        '<div class="flex gap-2">' +
+          '<div class="relative w-9 shrink-0" style="height:' + ALTO + 'px">' + ejeY + '</div>' +
+          '<div class="relative flex-1 border-l border-b border-gray-300" style="height:' + ALTO + 'px">' + rejilla +
+            '<div class="absolute inset-0 flex items-end gap-1.5 sm:gap-3 px-1.5 sm:px-3">' + cols + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="flex gap-2 mt-1.5"><div class="w-9 shrink-0 text-[10px] text-gray-400 text-right pr-2 pt-0.5">nivel</div><div class="flex-1 flex gap-1.5 sm:gap-3 px-1.5 sm:px-3">' + pies + '</div></div>' +
+        '<div class="flex gap-2 mt-0.5"><div class="w-9 shrink-0"></div><div class="flex-1 flex justify-between px-1.5 sm:px-3 text-[10px] font-semibold text-gray-500"><span>1 · Poco preparado</span><span>5 · Muy preparado</span></div></div>';
+
+    var lblM = document.getElementById('inf4-lbl-m'), lblH = document.getElementById('inf4-lbl-h');
+    var legAct = document.getElementById('inf4-leg-activo'), legActTxt = document.getElementById('inf4-leg-activo-txt'), legOtroTxt = document.getElementById('inf4-leg-otro-txt');
+    var resumen = document.getElementById('inf4-resumen');
+    var aviso = document.getElementById('inf4-aviso');
+    if (aviso && DATOS.provisional) aviso.classList.remove('hidden');
+
+    function q(sel) { return raiz.querySelector(sel); }
+
+    function pintar(esHombre) {
+        var act = esHombre ? DATOS.h : DATOS.m, otro = esHombre ? DATOS.m : DATOS.h;
+        for (var i = 0; i < 5; i++) {
+            var barra = q('[data-bar="' + i + '"]'), fantasma = q('[data-ghost="' + i + '"]');
+            barra.style.height = alto(act.v[i]) + 'px';
+            barra.style.backgroundColor = act.color;
+            fantasma.style.height = alto(otro.v[i]) + 'px';
+            fantasma.style.borderColor = otro.color;
+            var val = q('[data-val="' + i + '"]');
+            val.innerHTML = '<span class="sm:hidden">' + fmt(act.v[i], 1) + '%</span><span class="hidden sm:inline">' + fmt(act.v[i], 2) + '%</span>';
+            val.style.color = act.color;
+            var d = act.v[i] - otro.v[i], dif = q('[data-dif="' + i + '"]');
+            var num = Math.abs(d) < 0.05 ? '0,0' : (d > 0 ? '+' : '−') + fmt(Math.abs(d));
+            dif.innerHTML = num + '<span class="hidden sm:inline"> pp</span>';
+            dif.style.color = d > 0.05 ? act.color : '#6b7280';
+            dif.style.fontWeight = d > 0.05 ? '800' : '600';
+        }
+        raiz.setAttribute('aria-label', 'Porcentaje de ' + act.nombre.toLowerCase() + ' en cada nivel de preparación, del 1 al 5, con la referencia punteada de ' + otro.nombre.toLowerCase());
+
+        lblM.className = 'text-sm transition-colors duration-300 uppercase tracking-wide ' + (esHombre ? 'font-bold text-gray-400' : 'font-black text-[#ec4e53]');
+        lblH.className = 'text-sm transition-colors duration-300 uppercase tracking-wide ' + (esHombre ? 'font-black text-[#c00022]' : 'font-bold text-gray-400');
+        if (legAct) legAct.style.backgroundColor = act.color;
+        if (legActTxt) legActTxt.textContent = act.nombre;
+        if (legOtroTxt) legOtroTxt.textContent = otro.nombre + ' (referencia)';
+        var legOtro = legOtroTxt && legOtroTxt.previousElementSibling; if (legOtro) legOtro.style.borderColor = otro.color;
+
+        if (resumen) {
+            function chip(t, v, osc) {
+                return '<div class="rounded-xl p-2.5 text-center border ' + (osc ? 'text-white border-transparent' : 'bg-white border-[#f3c1a8]') + '" style="' + (osc ? 'background:' + act.color : '') + '">' +
+                       '<div class="text-lg sm:text-xl font-black whitespace-nowrap ' + (osc ? '' : 'text-[#c00022]') + '">' + v + '</div>' +
+                       '<div class="text-[10px] sm:text-[11px] font-semibold leading-tight mt-0.5 ' + (osc ? 'text-white/90' : 'text-gray-600') + '">' + t + '</div></div>';
+            }
+            resumen.innerHTML = chip('Mediana', act.mediana, false) + chip('Moda', act.moda, false) + chip('Niveles altos (4 y 5)', act.altos, true);
+        }
+    }
+
+    function alternar(h) { sw.checked = h; pintar(h); }
+    sw.addEventListener('change', function () { pintar(sw.checked); });
+    lblM.addEventListener('click', function () { alternar(false); });
+    lblH.addEventListener('click', function () { alternar(true); });
+
+    requestAnimationFrame(function () { requestAnimationFrame(function () { pintar(false); }); });
+} catch (err) { console.error('Informe #04 (género):', err); }
+})();
+
+
+/* ================================================================
+   NAVEGACIÓN ENTRE INFORMES (anterior / siguiente)
+   ================================================================ */
+(function () {
+    var TOTAL = 8;
+    function $(id) { return document.getElementById(id); }
+    function pad(n) { return (n < 10 ? '0' : '') + n; }
+    function esc(t) { return String(t).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+    function info(i) {
+        var b = $('btn-inf-' + i); if (!b) return null;
+        var h = b.querySelector('h5'), d = b.querySelector('p');
+        return { n: i, titulo: h ? h.textContent.trim() : 'Informe ' + i, desc: d ? d.textContent.trim() : '' };
+    }
+
+    var FLECHA_IZQ = '<svg class="w-4 h-4 transition-transform group-hover:-translate-x-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M8.4 4.6 10 6 7 9h10v2H7l3 3-1.6 1.4L3 10z"/></svg>';
+    var FLECHA_DER = '<svg class="w-4 h-4 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M11.6 4.6 10 6l3 3H3v2h10l-3 3 1.6 1.4L17 10z"/></svg>';
+
+    window.actualizarNavInformes = function (actual) {
+        var nav = $('informe-nav'); if (!nav) return;
+        var prev = $('informe-prev'), next = $('informe-next');
+        var cur = info(actual); if (!cur) { nav.classList.add('hidden'); return; }
+        nav.classList.remove('hidden');
+
+        $('informe-nav-pos').textContent = 'Informe ' + actual + ' de ' + TOTAL;
+
+        var puntos = '';
+        for (var i = 1; i <= TOTAL; i++) {
+            var inf = info(i), on = i === actual;
+            puntos += '<button type="button" data-ir="' + i + '" class="group/dot w-8 h-8 flex items-center justify-center" aria-label="Ir al informe ' + i + ': ' + esc(inf ? inf.titulo : '') + '"' + (on ? ' aria-current="true"' : '') + '>' +
+                      '<span class="block h-2.5 rounded-full transition-all ' + (on ? 'w-7 bg-[#c00022]' : 'w-2.5 bg-[#f3c1a8] group-hover/dot:bg-[#ec4e53]') + '"></span></button>';
+        }
+        $('informe-nav-puntos').innerHTML = puntos;
+
+        var a = info(actual - 1), b = info(actual + 1);
+        if (a) {
+            prev.classList.remove('hidden');
+            prev.setAttribute('data-ir', a.n);
+            prev.setAttribute('aria-label', 'Ir al informe anterior: ' + a.titulo);
+            prev.innerHTML =
+                '<span class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-gray-400 group-hover:text-[#c00022] mb-3">' + FLECHA_IZQ + 'Informe anterior</span>' +
+                '<span class="flex items-start gap-4"><span class="text-4xl font-black text-[#ec4e53] leading-none">' + pad(a.n) + '</span>' +
+                '<span><span class="block font-black text-gray-900 leading-tight">' + esc(a.titulo) + '</span><span class="block text-xs text-gray-500 mt-1.5 leading-snug">' + esc(a.desc) + '</span></span></span>';
+        } else { prev.classList.add('hidden'); prev.removeAttribute('data-ir'); }
+
+        if (b) {
+            next.classList.remove('hidden');
+            next.setAttribute('data-ir', b.n);
+            next.setAttribute('aria-label', 'Continuar con el siguiente informe: ' + b.titulo);
+            next.innerHTML =
+                '<span class="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-[#fae6df] mb-3">Siguiente informe' + FLECHA_DER + '</span>' +
+                '<span class="flex items-start gap-4"><span class="text-4xl font-black text-[#f3c1a8] leading-none">' + pad(b.n) + '</span>' +
+                '<span><span class="block font-black leading-tight">' + esc(b.titulo) + '</span><span class="block text-xs text-white/80 mt-1.5 leading-snug">' + esc(b.desc) + '</span></span></span>';
+        } else { next.classList.add('hidden'); next.removeAttribute('data-ir'); }
+
+        /* Si falta uno de los dos, el otro ocupa todo el ancho en pantallas grandes */
+        prev.classList.toggle('sm:col-span-2', !b && !!a);
+        next.classList.toggle('sm:col-span-2', !a && !!b);
+    };
+
+    document.addEventListener('click', function (e) {
+        var t = e.target.closest && e.target.closest('#informe-nav [data-ir]');
+        if (t && typeof showTab === 'function') { showTab(parseInt(t.getAttribute('data-ir'), 10), true); return; }
+        if (e.target.closest && e.target.closest('#informe-indice, #footer-ver-informes')) {
+            var idx = $('indice-informes');
+            if (idx) idx.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
+})();
 </script>
 
 </body>
